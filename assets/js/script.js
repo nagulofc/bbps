@@ -1,5 +1,42 @@
 'use strict';
 
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slider img');
+const totalSlides = slides.length;
+const intervalTime = 2000; // 2 seconds
+
+function nextSlide() {
+  slideIndex = (slideIndex + 1) % totalSlides;
+  updateSlide();
+}
+
+function updateSlide() {
+  const offset = -slideIndex * 100;
+  document.querySelector('.slider').style.transform = `translateX(${offset}%)`;
+}
+
+setInterval(nextSlide, intervalTime);
+
+// Manual sliding
+document.addEventListener('DOMContentLoaded', function() {
+  let startX;
+  let endX;
+
+  document.querySelector('.slider').addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+  });
+
+  document.querySelector('.slider').addEventListener('touchend', function(e) {
+    endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+      slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    } else if (startX - endX > 50) {
+      slideIndex = (slideIndex + 1) % totalSlides;
+      updateSlide();
+    }
+  });
+});
 
 
 /**
