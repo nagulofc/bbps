@@ -311,7 +311,21 @@ body {
 
 .header.active { position: fixed; }
 
-.header .container,
+
+.header .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.header .container .navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-right: -50vw;
+}
 .header-actions,
 .navbar .wrapper {
   display: flex;
